@@ -1,0 +1,44 @@
+= NightClazz : Initiation à Docker Swarm
+
+:toc:
+
+== Pré-requis
+* Java 8+
+* Docker 1.13+
+* Docker compose 1.10+
+
+== Stack technique
+* Spring boot
+* Rabbitmq
+* Docker
+
+== Sujet
+
+image::affiche.png[Scale the jedi]
+
+== Description des modules
+
+=== stormproducer
+
+Module qui produit les messages sur le serveur rabbitmq
+
+=== jedifactory
+
+Module qui consome les messages sur le serveur rabbitmq
+
+== Steps
+
+=== Avant la dockerisation
+
+. Installer un serveur rabbitmq (utiliser l'image docker rabbitmq:3.6.9-management)
+. Se connecter à la console d'administration et créer une queue sur le serveur
+. Lancer le module stormproducer (simple application spring-boot) et vérifier sur la console rabbitmq l'empilement des messages
+. Lancer le module jedifactory et vérifier la purge des message sur la console rabbitmq
+
+=== Dockerisation
+
+. Créer les fichiers dockerfile
+
+=== Scale/mise en place swarm
+
+. Initialiser les noeuds swarm + commandes
