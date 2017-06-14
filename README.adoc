@@ -14,7 +14,7 @@
 
 == Sujet
 
-image::affiche.png[Scale the jedi]
+//image::affiche.png[Scale the jedi]
 
 == Description des modules
 
