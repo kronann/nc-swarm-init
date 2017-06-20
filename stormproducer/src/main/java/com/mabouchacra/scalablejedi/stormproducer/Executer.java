@@ -1,10 +1,10 @@
 package com.mabouchacra.scalablejedi.stormproducer;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by marc on 19/04/17.

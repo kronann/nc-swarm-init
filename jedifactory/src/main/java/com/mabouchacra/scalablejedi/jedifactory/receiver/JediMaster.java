@@ -13,7 +13,7 @@ public class JediMaster {
 
     private static CountDownLatch latch = new CountDownLatch(1);
 
-    @RabbitListener(queues = {"jedi-queue"})
+    @RabbitListener(queues = {"jedi-queue"}, containerFactory = "myRabbitListenerContainerFactory")
     public void defend(String message) throws InterruptedException {
         System.out.println("Message received : " + message);
         //Thread.currentThread().wait(3000);

@@ -9,3 +9,6 @@ services:
   stormproducer:
     build: stormproducer
     container_name: stormproducer
+  jedifactory:
+    build: jedifactory
+    container_name: jedifactory
