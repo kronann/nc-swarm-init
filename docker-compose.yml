@@ -1,14 +1,23 @@
-version: '2'
+version: '2.1'
+
 services:
   serverrabbit:
-    image: rabbitmq:3.6.9-management
+    build: serverrabbit/
     ports:
       - "5672:5672"
       - "15672:15672"
     container_name: serverrabbit
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 5s
+      timeout: 10s
+      retries: 2
   stormproducer:
-    build: stormproducer
+    build: stormproducer/
     container_name: stormproducer
+    depends_on:
+      serverrabbit:
+        condition: service_healthy
   jedifactory:
-    build: jedifactory
+    build: jedifactory/
     container_name: jedifactory

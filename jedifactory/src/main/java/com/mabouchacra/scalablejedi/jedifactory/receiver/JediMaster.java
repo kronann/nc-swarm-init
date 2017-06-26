@@ -16,6 +16,5 @@ public class JediMaster {
     @RabbitListener(queues = {"jedi-queue"}, containerFactory = "myRabbitListenerContainerFactory")
     public void defend(String message) throws InterruptedException {
         System.out.println("Message received : " + message);
-        //Thread.currentThread().wait(3000);
     }
 }

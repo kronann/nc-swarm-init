@@ -24,7 +24,7 @@ Module qui produit les messages sur le serveur rabbitmq
 
 === jedifactory
 
-Module qui consome les messages sur le serveur rabbitmq
+Module qui consomme les messages sur le serveur rabbitmq
 
 == Steps
 
@@ -42,3 +42,20 @@ Module qui consome les messages sur le serveur rabbitmq
 === Scale/mise en place swarm
 
 . Initialiser les noeuds swarm + commandes
+
+
+=== Créer son registry
+
+. $docker run -d -p 5000:5000 --name registry registry:2
+
+=== Créer son projet
+
+. $mvn install
+
+=== Lancer les containers
+
+. $docker-compose up -d --build
+. $docker-compose down --rmi 'all'
+
+rabbitmqadmin publish exchange=amq.default routing_key=jedi-queue payload="hello, world"
+rabbitmqadmin get queue=jedi-queue requeue=false

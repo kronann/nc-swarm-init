@@ -1,5 +1,5 @@
 FROM openjdk:8
-MAINTAINER marc&greg <@zenika.com>
+MAINTAINER zenika-nightclazz <@zenika.com>
 COPY target/jedifactory-0.0.1-SNAPSHOT.jar /usr/src/
 WORKDIR /usr/src/
 

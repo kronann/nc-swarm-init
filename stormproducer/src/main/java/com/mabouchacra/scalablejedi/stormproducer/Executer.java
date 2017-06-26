@@ -1,10 +1,13 @@
 package com.mabouchacra.scalablejedi.stormproducer;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by marc on 19/04/17.
@@ -14,14 +17,25 @@ public class Executer {
 
 	public static AtomicInteger count = new AtomicInteger(1);
 
+	private static final String JEDI_QUEUE = "jedi-queue";
+
+	private RabbitAdmin admin;
+
 	private RabbitTemplate template;
 
- 	public Executer(RabbitTemplate template) {
+	@Autowired
+	public Executer(RabbitTemplate template) {
 		this.template = template;
+		this.admin = new RabbitAdmin(this.template.getConnectionFactory());
+		createQueue();
 	}
 
-	@Scheduled(fixedRate = 2000)
-	public void attack() {		 
-		template.convertAndSend("jedi-queue", "Attack!!! Stormtrooper!! N°:" + count.getAndIncrement());
+	void createQueue() {
+		admin.declareQueue(new Queue(JEDI_QUEUE));
+	}
+
+	@Scheduled(fixedRate = 2000, initialDelay = 5000)
+	public void attack() {
+		template.convertAndSend( JEDI_QUEUE, "Attack!!! Stormtrooper!! N°:" + count.getAndIncrement());
 	}
 }
