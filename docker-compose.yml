@@ -3,6 +3,7 @@ version: '2.1'
 services:
   serverrabbit:
     build: serverrabbit/
+    image: nc-swarm/serverrabbit
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -14,10 +15,12 @@ services:
       retries: 2
   stormproducer:
     build: stormproducer/
+    image: nc-swarm/stormproducer
     container_name: stormproducer
     depends_on:
       serverrabbit:
         condition: service_healthy
   jedifactory:
     build: jedifactory/
+    image: nc-swarm/jedifactory
     container_name: jedifactory
