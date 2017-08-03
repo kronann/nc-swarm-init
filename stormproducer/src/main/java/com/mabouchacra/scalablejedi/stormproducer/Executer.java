@@ -34,7 +34,7 @@ public class Executer {
 		admin.declareQueue(new Queue(JEDI_QUEUE));
 	}
 
-	@Scheduled(fixedRate = 2000, initialDelay = 5000)
+	@Scheduled(fixedRate = 500, initialDelay = 5000)
 	public void attack() {
 		template.convertAndSend( JEDI_QUEUE, "Attack!!! Stormtrooper!! N°:" + count.getAndIncrement());
 	}
