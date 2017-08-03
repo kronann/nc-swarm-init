@@ -16,11 +16,9 @@ services:
   stormproducer:
     build: stormproducer/
     image: nc-swarm/stormproducer
-    container_name: stormproducer
     depends_on:
       serverrabbit:
         condition: service_healthy
   jedifactory:
     build: jedifactory/
     image: nc-swarm/jedifactory
-    container_name: jedifactory
