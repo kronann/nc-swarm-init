@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  serverrabbit:
+    build: serverrabbit/
+    image: localhost:5000/serverrabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    container_name: serverrabbit
+  stormproducer:
+    build: stormproducer/
+    image: localhost:5000/stormproducer
+    depends_on:
+      - serverrabbit
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  jedifactory:
+    build: jedifactory/
+    image: localhost:5000/jedifactory
